@@ -1,0 +1,68 @@
+:root {
+  --background-color: rgb(0, 48, 70);
+  --text-color: rgb(246, 241, 238);
+  --highlight-color: IndianRed;
+  --button-color: rgb(98, 170, 196);
+  --alt-dark-color: rgb(3, 59, 85);
+  --background-color: PapayaWhip;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.buffy-img {
+  height: 30vw;
+  outline: groove 2rem var(--highlight-color);
+}
+
+.buffy-img:hover {
+  background-image: url("");
+}
+
+.spin-anim {
+  animation: moveLeftToRight 15s linear;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes moveLeftToRight {
+  0% {
+    transform: scale(0.1) rotate(0deg) translateY(0) scaleX(0.85);
+    border-radius: 50%;
+    opacity: 0.2;
+  }
+  40% {
+    transform: scale(1) rotate(360deg);
+    border-radius: 0 100% 100% 100%;
+    opacity: 1;
+  }
+
+  60% {
+    transform: translateY(120%) scale(0.1) scaleX(0.85) rotate(45deg);
+  }
+
+  80% {
+    transform: translateY(60vh) scale(0.5) scaleX(0.85) rotate(45deg);
+  }
+}
