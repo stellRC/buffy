@@ -25,6 +25,8 @@ body {
   overflow: hidden;
   background-color: var(--background-color);
   color: var(--text-color);
+
+  background-image: url("http://www.transparenttextures.com/patterns/wood-pattern.png");
 }
 
 img {
@@ -35,10 +37,12 @@ img {
 .buffy-img {
   height: 30vw;
   outline: groove 2rem var(--highlight-color);
+  filter: grayscale(10%);
+  border: 0.5%;
 }
 
-.buffy-img:hover {
-  background-image: url("");
+.shadow {
+  box-shadow: 10px 10px 42px 0 rgba(0, 0, 0, 0.75);
 }
 
 .spin-anim {
@@ -58,7 +62,7 @@ img {
     opacity: 1;
   }
 
-  60% {
+  48% {
     transform: translateY(120%) scale(0.1) scaleX(0.85) rotate(45deg);
   }
 
