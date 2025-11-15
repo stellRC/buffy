@@ -20,7 +20,7 @@
 body {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   overflow: hidden;
   background-color: var(--background-color);
@@ -37,20 +37,47 @@ img {
 .buffy-img {
   height: 30vw;
   outline: groove 2rem var(--highlight-color);
+  box-shadow: 10px 10px 42px 0 rgba(0, 0, 0, 0.75);
   filter: grayscale(10%);
   border: 0.5%;
 }
 
-.shadow {
-  box-shadow: 10px 10px 42px 0 rgba(0, 0, 0, 0.75);
+/* BAT */
+
+.bats img {
+  height: 40px;
 }
 
+/* ANIMATION */
+
 .spin-anim {
-  animation: moveLeftToRight 15s linear;
+  animation: bloody-spin 15s linear;
   transition: all 1s ease-in-out;
 }
 
-@keyframes moveLeftToRight {
+.flying-anim {
+  animation: flying-fall 15s linear infinite;
+  transition: all 1s ease-in-out;
+  position: absolute;
+  mask-image: linear-gradient(
+    to bottom,
+    var(--background-color) 0%,
+    transparent 100%
+  );
+}
+
+.flying-anim:first-of-type {
+  right: 50%;
+
+  animation-delay: 4s, 2s;
+}
+
+.flying-anim:last-of-type {
+  right: 75%;
+  animation-delay: 1s, 2s;
+}
+
+@keyframes bloody-spin {
   0% {
     transform: scale(0.1) rotate(0deg) translateY(0) scaleX(0.85);
     border-radius: 50%;
@@ -68,5 +95,23 @@ img {
 
   80% {
     transform: translateY(60vh) scale(0.5) scaleX(0.85) rotate(45deg);
+  }
+}
+
+@keyframes flying-fall {
+  0% {
+    transform: translateX(0px);
+    top: -10%;
+    opacity: 0.3;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(80px);
+  }
+  100% {
+    transform: translateX(0px);
+    top: 100%;
   }
 }
