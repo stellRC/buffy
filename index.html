@@ -5,9 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buffy</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="buffy.js" defer></script>
   </head>
   <body>
-    <img class="buffy-img spin-anim" src="buffy.jpg" alt="buffering" />
+    <div class="buffy-img spin-anim text-container background" id="buffyImg">
+      <div class="hidden hidden-anim">
+        <div>
+          <h1>VampShell</h1>
+        </div>
+        <ul id="pathList">
+          <li class="flex-row">
+            <span class="blue-text">fire06@buffy:</span>
+            <span class="green-text">~</span>
+          </li>
+        </ul>
+        <div>
+          <form action="#">
+            <span>$</span>
+            <input type="text" name="path" />
+          </form>
+        </div>
+      </div>
+    </div>
     <div class="bats">
       <img
         class="flying-anim"

@@ -1,7 +1,14 @@
 :root {
   --highlight-color: rgb(205, 92, 92);
 
-  --background-color: rgb(255, 239, 213);
+  --text-color: rgb(255, 239, 213);
+  --green: rgb(35, 217, 50);
+  --blue: rgb(91, 140, 240);
+}
+
+@font-face {
+  font-family: Joti; /* set name */
+  src: url(JotiOne-Regular.ttf); /* url of the font */
 }
 
 *,
@@ -20,8 +27,6 @@ body {
   justify-content: space-evenly;
   align-items: center;
   overflow: hidden;
-  background-color: var(--background-color);
-  color: var(--text-color);
 
   background-image: url("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXB1OTluamNsbnZ0bTZ0eHJ2YmJuNWFmbmtndjBhN285NWJoaWx1ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f4IjBQupqojhqQzKk2/giphy.gif");
   background-position: center;
@@ -29,12 +34,58 @@ body {
   background-repeat: no-repeat;
 }
 
+input {
+  background-color: inherit;
+  outline: none;
+  border: none;
+  caret-color: var(--text-color);
+}
+
+body,
+input {
+  color: var(--text-color);
+  font-family: Joti;
+  font-size: 18px;
+}
+.hidden {
+  opacity: 1;
+}
+
+span {
+  font-size: 2rem;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.text-container {
+  padding: 2rem;
+}
+
+.green-text {
+  color: var(--green);
+}
+
+.blue-text {
+  color: var(--blue);
+}
+
 img {
   display: block;
   max-width: 100%;
 }
 
+.background {
+  background-image: url("buffy.jpg");
+  background-size: cover;
+}
+
 .buffy-img {
+  background-color: var(--highlight-color);
+  width: 40vw;
   height: 30vw;
   outline: groove 1rem var(--highlight-color);
   filter: grayscale(10%);
@@ -152,11 +203,21 @@ img {
 }
 
 .bats img {
-  height: 40px;
+  height: 2rem;
+  position: absolute;
+
+  mask-image: linear-gradient(
+    to bottom,
+    var(--text-color) 0%,
+    transparent 100%
+  );
 }
 
 /* ANIMATION */
-
+.hidden-anim {
+  animation: show-hidden 15s linear;
+  transition: all 1s ease-in-out;
+}
 .spin-anim {
   animation: bloody-spin 15s linear;
   transition: all 1s ease-in-out;
@@ -165,12 +226,6 @@ img {
 .flying-anim {
   animation: flying-fall 15s linear infinite;
   transition: all 1s ease-in-out;
-  position: absolute;
-  mask-image: linear-gradient(
-    to bottom,
-    var(--background-color) 0%,
-    transparent 100%
-  );
 }
 
 .flying-anim:first-of-type {
@@ -220,5 +275,19 @@ img {
   100% {
     transform: translateX(0px);
     top: 100%;
+  }
+}
+
+@keyframes show-hidden {
+  0% {
+    opacity: 0;
+  }
+
+  95% {
+    opacity: 0.1;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
