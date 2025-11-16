@@ -11,8 +11,8 @@
 }
 
 @font-face {
-  font-family: Joti; /* set name */
-  src: url(JotiOne-Regular.ttf); /* url of the font */
+  font-family: Joti;
+  src: url(JotiOne-Regular.ttf);
 }
 
 *,
