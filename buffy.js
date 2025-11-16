@@ -2,42 +2,137 @@ const form = document.querySelector("form");
 const pathList = document.getElementById("pathList");
 const path = form.elements.path;
 const buffyImg = document.getElementById("buffyImg");
+
+const shows = ["buffy", "angel", "tb", "vd", "originals"];
+const quote = ["kicking", "ass", "is", "comfort", "food"];
+
 let thisVal = "~";
+let currentShow = 0;
+let currentQuote = 0;
+let chosenPath = 0;
+let validPath = false;
+
+const Command = {
+  HELP: "he",
+  LS: "ls",
+  CD: "cd",
+  BUFFY: "bu",
+  CLEAR: "cl",
+  BACK: "..",
+};
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+
   buffyImg.classList.remove("background");
 
-  checkText(path.value);
+  checkCommand(path.value);
 
   removeTextElement();
 
   path.value = "";
 });
 
-function checkText(pathVal) {
-  let command = pathVal.slice(0, 2);
+function checkCommand(pathVal) {
+  let newCommand = pathVal.slice(0, 2);
+  let newPath = pathVal.substring(3);
 
-  if (command == "cd") {
-    if (pathVal.length > 2) {
-      let newPath = pathVal.substring(3);
-      addTextElement(newPath, thisVal);
+  switch (newCommand) {
+    case Command.HELP:
+      addInvalidText(" are valid commands", "cd, ls, help, clear, and buffy");
+      break;
+    case Command.LS:
+      processLS();
+      break;
+    case Command.CD:
+      processCD(newPath);
+      break;
+    case Command.BUFFY:
+      addInvalidText("", "If the apocalypse comes, beep me");
+      break;
+    case Command.CLEAR:
+      removeAllChildren();
+      resetPath();
+      break;
+    default:
+      addInvalidText(" not recognized", pathVal);
+      resetPath();
+      break;
+  }
+}
+
+function processCD(newPath) {
+  if (newPath == Command.BACK) {
+    processBack(newPath);
+    validPath = true;
+  } else if (
+    newPath == shows[currentShow] &&
+    (chosenPath == 0 || chosenPath == 1)
+  ) {
+    chosenPath = 1;
+    currentShow++;
+    validPath = true;
+  } else if (
+    newPath == quote[currentQuote] &&
+    (chosenPath == 0 || chosenPath == 2)
+  ) {
+    chosenPath = 2;
+    currentQuote++;
+    validPath = true;
+  }
+
+  if (validPath == true) {
+    addTextElement(newPath, thisVal);
+    if (newPath != Command.BACK) {
       thisVal += "/" + newPath;
     }
-  } else if (command == "ls") {
-    addInvalidText("Buffy may still be buffering", "Check back later...");
   } else {
-    if (pathVal == "clear") {
-      removeAllChildren();
-    } else if (pathVal == "help") {
-      addInvalidText(" are valid commands", "cd, ls, help, clear, and buffy");
-    } else if (pathVal == "buffy" || pathVal == "Buffy") {
-      addInvalidText("", "If the apocalypse comes, beep me");
-    } else {
-      addInvalidText(" not recognized", path.value);
-    }
-    thisVal = "~";
+    addInvalidText(" not recognized", path.value);
   }
+
+  validPath = false;
+}
+
+function processBack(newPath) {
+  if (currentQuote > 1 || currentShow > 1) {
+    if (chosenPath == 1) {
+      currentShow--;
+      for (let i = 0; i < currentShow; i++) {
+        thisVal = "/" + shows[i];
+        newPath = shows[currentShow];
+      }
+    } else if (chosenPath == 2) {
+      currentQuote--;
+      for (let i = 0; i < currentQuote; i++) {
+        thisVal = "/" + quote[i];
+        newPath = quote[currentQuote];
+      }
+    }
+  } else {
+    resetPath();
+    newPath = "";
+  }
+}
+
+function processLS() {
+  if (currentQuote >= 5 || currentShow >= 5) {
+    addInvalidText("", "THE WHO WHATTING HOW WITH HUH?!");
+    resetPath();
+  } else if (chosenPath == 0) {
+    addInvalidText("/", shows[currentShow]);
+    addInvalidText("/", quote[currentQuote]);
+  } else if (chosenPath == 1) {
+    addInvalidText("/", shows[currentShow]);
+  } else {
+    addInvalidText("/", quote[currentQuote]);
+  }
+}
+
+function resetPath() {
+  thisVal = "~";
+  chosenPath = 0;
+  currentQuote = 0;
+  currentShow = 0;
 }
 
 function addTextElement(pathVal, prevValue) {
@@ -49,10 +144,8 @@ function addTextElement(pathVal, prevValue) {
   blueText.classList.add("blue-text");
 
   let greenText = document.createElement("span");
-  let newPath = prevValue + "/" + pathVal;
-  console.log("cow");
 
-  if (newPath.length > 12) thisVal = "~";
+  let newPath = prevValue + "/" + pathVal;
 
   greenText.innerHTML = newPath;
   greenText.classList.add("green-text");

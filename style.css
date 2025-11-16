@@ -90,7 +90,7 @@ img {
 .buffy-img {
   background-color: var(--highlight-color);
   /* background-image: url("http://www.transparenttextures.com/patterns/wood-pattern.png"); */
-  width: 40vw;
+  width: 60vw;
   height: 30vw;
   outline: groove 1rem var(--highlight-color);
   filter: grayscale(10%);
@@ -250,6 +250,7 @@ img {
     border-radius: 50%;
     opacity: 0.2;
     background-image: url("buffy.jpg");
+    width: 30vw;
   }
   40% {
     transform: scale(1) rotate(360deg);
@@ -258,11 +259,12 @@ img {
   }
 
   75% {
-    transform: translateY(120%) scale(0.1) scaleX(0.85) rotate(45deg);
+    transform: scale(0.1) scaleX(0.85) rotate(45deg);
   }
 
   80% {
-    transform: translateY(60vh) scale(0.5) scaleX(0.85) rotate(45deg);
+    transform: scale(0.5) scaleX(0.85) rotate(45deg);
+    background-image: url("buffy.jpg");
   }
 }
 
