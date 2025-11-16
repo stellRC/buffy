@@ -4,7 +4,7 @@ const batList = document.getElementById("bat");
 const path = form.elements.path;
 const buffyImg = document.getElementById("buffyImg");
 
-const shows = ["buffy", "angel", "tb", "vd", "originals"];
+const shows = ["buffy", "angel", "true blood", "vampire diaries", "originals"];
 const quote = ["kicking", "ass", "is", "comfort", "food"];
 
 let thisVal = "~";
