@@ -6,21 +6,21 @@ const buffyImg = document.getElementById("buffyImg");
 
 const shows = ["buffy", "angel", "true blood", "vampire diaries", "originals"];
 const quote = ["kicking", "ass", "is", "comfort", "food"];
-const tact = [
-  "tact",
-  "is",
-  "just",
+const cheese = [
+  "i",
+  "wear",
+  "the",
+  "cheese",
+  "it",
+  "does",
   "not",
-  "saying",
-  "true",
-  "stuff",
-  "ill",
-  "pass",
+  "wear",
+  "me",
 ];
 
 let thisVal = "~";
-let currentShow = 0;
-let currentQuote = 0;
+
+let currentIndex = 0;
 let chosenPath = 0;
 let validPath = false;
 
@@ -91,24 +91,31 @@ function checkCommand(pathVal) {
 
 function processCD(newPath) {
   if (newPath == Command.BACK) {
-    if (currentQuote >= 1 || currentShow >= 1) {
+    if (currentIndex >= 1) {
       newPath = processBack();
       validPath = true;
-      console.log("cat");
     }
   } else if (
-    newPath == shows[currentShow] &&
+    newPath == shows[currentIndex] &&
     (chosenPath == 0 || chosenPath == 1)
   ) {
     chosenPath = 1;
-    currentShow++;
+
+    currentIndex++;
     validPath = true;
   } else if (
-    newPath == quote[currentQuote] &&
+    newPath == quote[currentIndex] &&
     (chosenPath == 0 || chosenPath == 2)
   ) {
     chosenPath = 2;
-    currentQuote++;
+    currentIndex++;
+    validPath = true;
+  } else if (
+    newPath == cheese[currentIndex] &&
+    (chosenPath == 0 || chosenPath == 3)
+  ) {
+    chosenPath = 3;
+    currentIndex++;
     validPath = true;
   }
 
@@ -133,18 +140,18 @@ function processBat() {
 
 function processBack() {
   let newPath = "";
-
+  currentIndex--;
   if (chosenPath == 1) {
-    currentShow--;
-
-    for (let i = 0; i < currentShow; i++) {
+    for (let i = 0; i < currentIndex; i++) {
       thisVal = "/" + shows[i];
     }
   } else if (chosenPath == 2) {
-    currentQuote--;
-
-    for (let i = 0; i < currentQuote; i++) {
+    for (let i = 0; i < currentIndex; i++) {
       thisVal = "/" + quote[i];
+    }
+  } else if (chosenPath == 3) {
+    for (let i = 0; i < currentIndex; i++) {
+      thisVal = "/" + cheese[i];
     }
   }
 
@@ -152,24 +159,30 @@ function processBack() {
 }
 
 function processLS() {
-  if (currentQuote >= 5 || currentShow >= 5) {
+  if (
+    (chosenPath == 1 && currentIndex >= shows.length) ||
+    (chosenPath == 2 && currentIndex >= quote.length) ||
+    (chosenPath == 3 && currentIndex >= cheese.length)
+  ) {
     addInvalidText("", "THE WHO WHATTING HOW WITH HUH?!");
     resetPath();
   } else if (chosenPath == 0) {
-    addInvalidText("/", shows[currentShow]);
-    addInvalidText("/", quote[currentQuote]);
+    addInvalidText("/", shows[currentIndex]);
+    addInvalidText("/", quote[currentIndex]);
+    addInvalidText("/", cheese[currentIndex]);
   } else if (chosenPath == 1) {
-    addInvalidText("/", shows[currentShow]);
-  } else {
-    addInvalidText("/", quote[currentQuote]);
+    addInvalidText("/", shows[currentIndex]);
+  } else if (chosenPath == 2) {
+    addInvalidText("/", quote[currentIndex]);
+  } else if (chosenPath == 3) {
+    addInvalidText("/", cheese[currentIndex]);
   }
 }
 
 function resetPath() {
   thisVal = "~";
   chosenPath = 0;
-  currentQuote = 0;
-  currentShow = 0;
+  currentIndex = 0;
 }
 
 function addTextElement(pathVal, prevValue) {
