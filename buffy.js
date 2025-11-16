@@ -76,8 +76,8 @@ function checkCommand(pathVal) {
     case Command.BAT:
       processBat();
       addInvalidText(
-        "",
-        "Recording bat sonar is something soothingly akin to having one's teeth drilled"
+        "Bat count: " + batList.childElementCount,
+        "Recording bat sonar is something soothingly akin to having one's teeth drilled. "
       );
       break;
     default:
