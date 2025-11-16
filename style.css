@@ -1,10 +1,13 @@
 :root {
   --highlight-color: rgb(205, 92, 92);
-
   --text-color: rgb(255, 239, 213);
   --green: rgb(35, 217, 50);
   --blue: rgb(91, 140, 240);
   --red-color: rgb(100, 10, 10);
+
+  --word-space: 0.16;
+  --letter-space: 0.12;
+  --line-height-base: 1.5;
 }
 
 @font-face {
@@ -34,6 +37,10 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+
+  letter-spacing: var(--letter-space);
+  word-spacing: var(--word-space);
+  line-height: var(--line-height-base);
 }
 
 input {

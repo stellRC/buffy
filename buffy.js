@@ -6,6 +6,17 @@ const buffyImg = document.getElementById("buffyImg");
 
 const shows = ["buffy", "angel", "true blood", "vampire diaries", "originals"];
 const quote = ["kicking", "ass", "is", "comfort", "food"];
+const tact = [
+  "tact",
+  "is",
+  "just",
+  "not",
+  "saying",
+  "true",
+  "stuff",
+  "ill",
+  "pass",
+];
 
 let thisVal = "~";
 let currentShow = 0;
@@ -80,8 +91,11 @@ function checkCommand(pathVal) {
 
 function processCD(newPath) {
   if (newPath == Command.BACK) {
-    processBack(newPath);
-    validPath = true;
+    if (currentQuote >= 1 || currentShow >= 1) {
+      newPath = processBack();
+      validPath = true;
+      console.log("cat");
+    }
   } else if (
     newPath == shows[currentShow] &&
     (chosenPath == 0 || chosenPath == 1)
@@ -100,7 +114,7 @@ function processCD(newPath) {
 
   if (validPath == true) {
     addTextElement(newPath, thisVal);
-    if (newPath != Command.BACK) {
+    if (newPath != "") {
       thisVal += "/" + newPath;
     }
   } else {
@@ -117,25 +131,24 @@ function processBat() {
   batList.appendChild(newBat);
 }
 
-function processBack(newPath) {
-  if (currentQuote > 1 || currentShow > 1) {
-    if (chosenPath == 1) {
-      currentShow--;
-      for (let i = 0; i < currentShow; i++) {
-        thisVal = "/" + shows[i];
-        newPath = shows[currentShow];
-      }
-    } else if (chosenPath == 2) {
-      currentQuote--;
-      for (let i = 0; i < currentQuote; i++) {
-        thisVal = "/" + quote[i];
-        newPath = quote[currentQuote];
-      }
+function processBack() {
+  let newPath = "";
+
+  if (chosenPath == 1) {
+    currentShow--;
+
+    for (let i = 0; i < currentShow; i++) {
+      thisVal = "/" + shows[i];
     }
-  } else {
-    resetPath();
-    newPath = "";
+  } else if (chosenPath == 2) {
+    currentQuote--;
+
+    for (let i = 0; i < currentQuote; i++) {
+      thisVal = "/" + quote[i];
+    }
   }
+
+  return newPath;
 }
 
 function processLS() {
@@ -168,8 +181,10 @@ function addTextElement(pathVal, prevValue) {
   blueText.classList.add("blue-text");
 
   let greenText = document.createElement("span");
-
-  let newPath = prevValue + "/" + pathVal;
+  let newPath = prevValue;
+  if (pathVal != "") {
+    newPath += "/" + pathVal;
+  }
 
   greenText.innerHTML = newPath;
   greenText.classList.add("green-text");
