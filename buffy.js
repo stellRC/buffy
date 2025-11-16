@@ -8,12 +8,27 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   buffyImg.classList.remove("background");
 
-  addTextElement(path.value, thisVal);
+  checkText(path.value);
   removeTextElement();
 
   thisVal += "/" + path.value;
   path.value = "";
 });
+
+function checkText(pathVal) {
+  let command = pathVal.slice(0, 2);
+
+  if (command == "cd") {
+    if (pathVal.length > 2) {
+      let newPath = pathVal.substring(3);
+      addTextElement(newPath, thisVal);
+    }
+  } else if (command == "ls") {
+    addTextElement("Frog Eggs", thisVal);
+  } else {
+    addInvalidText("not recognized", thisVal);
+  }
+}
 
 function addTextElement(pathVal, prevValue) {
   let textRow = document.createElement("li");
@@ -33,6 +48,16 @@ function addTextElement(pathVal, prevValue) {
 
   textRow.appendChild(blueText);
   textRow.appendChild(greenText);
+}
+
+function addInvalidText(pathVal) {
+  let textRow = document.createElement("li");
+  textRow.classList.add("flex-row");
+
+  let errorText = document.createElement("span");
+  errorText.innerHTML = pathVal;
+  errorText.classList.add("red-text");
+  textRow.appendChild(errorText);
   pathList.appendChild(textRow);
 }
 

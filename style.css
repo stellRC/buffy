@@ -85,6 +85,7 @@ img {
 
 .buffy-img {
   background-color: var(--highlight-color);
+  /* background-image: url("http://www.transparenttextures.com/patterns/wood-pattern.png"); */
   width: 40vw;
   height: 30vw;
   outline: groove 1rem var(--highlight-color);
