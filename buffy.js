@@ -1,5 +1,6 @@
 const form = document.querySelector("form");
 const pathList = document.getElementById("pathList");
+const batList = document.getElementById("bat");
 const path = form.elements.path;
 const buffyImg = document.getElementById("buffyImg");
 
@@ -19,6 +20,8 @@ const Command = {
   BUFFY: "bu",
   CLEAR: "cl",
   BACK: "..",
+  BAT: "ba",
+  WOW: "wo",
 };
 
 form.addEventListener("submit", (e) => {
@@ -34,12 +37,16 @@ form.addEventListener("submit", (e) => {
 });
 
 function checkCommand(pathVal) {
+  pathVal = pathVal.toLowerCase();
   let newCommand = pathVal.slice(0, 2);
   let newPath = pathVal.substring(3);
 
   switch (newCommand) {
     case Command.HELP:
-      addInvalidText(" are valid commands", "cd, ls, help, clear, and buffy");
+      addInvalidText(
+        " are valid commands",
+        "cd, ls, help, clear, bat, wow, and buffy"
+      );
       break;
     case Command.LS:
       processLS();
@@ -50,9 +57,19 @@ function checkCommand(pathVal) {
     case Command.BUFFY:
       addInvalidText("", "If the apocalypse comes, beep me");
       break;
+    case Command.WOW:
+      addInvalidText("", "FROG EGGS");
+      break;
     case Command.CLEAR:
       removeAllChildren();
       resetPath();
+      break;
+    case Command.BAT:
+      processBat();
+      addInvalidText(
+        "",
+        "Recording bat sonar is something soothingly akin to having one's teeth drilled"
+      );
       break;
     default:
       addInvalidText(" not recognized", pathVal);
@@ -91,6 +108,13 @@ function processCD(newPath) {
   }
 
   validPath = false;
+}
+
+function processBat() {
+  let newBat = document.createElement("img");
+  newBat.classList.add("flying-anim");
+  newBat.src = "https://media1.giphy.com/media/0xR7MUO0hJfWtco7C6/giphy.gif";
+  batList.appendChild(newBat);
 }
 
 function processBack(newPath) {

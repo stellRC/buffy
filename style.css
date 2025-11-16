@@ -30,6 +30,7 @@ body {
   overflow: hidden;
 
   background-image: url("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXB1OTluamNsbnZ0bTZ0eHJ2YmJuNWFmbmtndjBhN285NWJoaWx1ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f4IjBQupqojhqQzKk2/giphy.gif");
+
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -264,6 +265,9 @@ img {
 
   80% {
     transform: scale(0.5) scaleX(0.85) rotate(45deg);
+  }
+
+  85% {
     background-image: url("buffy.jpg");
   }
 }
