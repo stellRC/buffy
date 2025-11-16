@@ -84,7 +84,6 @@ img {
 }
 
 .background {
-  background-image: url("buffy.jpg");
   background-size: cover;
 }
 
@@ -221,11 +220,11 @@ img {
 
 /* ANIMATION */
 .hidden-anim {
-  animation: show-hidden 15s linear;
+  animation: show-hidden 5s linear;
   transition: all 1s ease-in-out;
 }
 .spin-anim {
-  animation: bloody-spin 15s linear;
+  animation: bloody-spin 5s linear;
   transition: all 1s ease-in-out;
 }
 
@@ -250,6 +249,7 @@ img {
     transform: scale(0.1) rotate(0deg) translateY(0) scaleX(0.85);
     border-radius: 50%;
     opacity: 0.2;
+    background-image: url("buffy.jpg");
   }
   40% {
     transform: scale(1) rotate(360deg);
@@ -257,7 +257,7 @@ img {
     opacity: 1;
   }
 
-  48% {
+  75% {
     transform: translateY(120%) scale(0.1) scaleX(0.85) rotate(45deg);
   }
 
