@@ -22,12 +22,21 @@ function checkText(pathVal) {
     if (pathVal.length > 2) {
       let newPath = pathVal.substring(3);
       addTextElement(newPath, thisVal);
-      thisVal += "/" + path.value;
+      thisVal += "/" + newPath;
     }
   } else if (command == "ls") {
-    addInvalidText("Frog Eggs");
+    addInvalidText("Buffy may still be buffering", "Check back later...");
   } else {
-    addInvalidText("not recognized");
+    if (pathVal == "clear") {
+      removeAllChildren();
+    } else if (pathVal == "help") {
+      addInvalidText(" are valid commands", "cd, ls, help, clear, and buffy");
+    } else if (pathVal == "buffy" || pathVal == "Buffy") {
+      addInvalidText("", "If the apocalypse comes, beep me");
+    } else {
+      addInvalidText(" not recognized", path.value);
+    }
+    thisVal = "~";
   }
 }
 
@@ -53,12 +62,12 @@ function addTextElement(pathVal, prevValue) {
   pathList.appendChild(textRow);
 }
 
-function addInvalidText(pathVal) {
+function addInvalidText(msg, pathVal) {
   let textRow = document.createElement("li");
   textRow.classList.add("flex-row");
 
   let errorText = document.createElement("span");
-  errorText.innerHTML = "$ " + pathVal;
+  errorText.innerHTML = "$ " + pathVal + msg;
   errorText.classList.add("red-text");
   textRow.appendChild(errorText);
   pathList.appendChild(textRow);
@@ -66,4 +75,10 @@ function addInvalidText(pathVal) {
 
 function removeTextElement() {
   if (pathList.childElementCount > 4) pathList.firstElementChild.remove();
+}
+
+function removeAllChildren() {
+  while (pathList.firstElementChild) {
+    pathList.lastElementChild.remove();
+  }
 }
