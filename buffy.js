@@ -9,9 +9,9 @@ form.addEventListener("submit", (e) => {
   buffyImg.classList.remove("background");
 
   checkText(path.value);
+
   removeTextElement();
 
-  thisVal += "/" + path.value;
   path.value = "";
 });
 
@@ -22,11 +22,12 @@ function checkText(pathVal) {
     if (pathVal.length > 2) {
       let newPath = pathVal.substring(3);
       addTextElement(newPath, thisVal);
+      thisVal += "/" + path.value;
     }
   } else if (command == "ls") {
-    addTextElement("Frog Eggs", thisVal);
+    addInvalidText("Frog Eggs");
   } else {
-    addInvalidText("not recognized", thisVal);
+    addInvalidText("not recognized");
   }
 }
 
@@ -40,6 +41,7 @@ function addTextElement(pathVal, prevValue) {
 
   let greenText = document.createElement("span");
   let newPath = prevValue + "/" + pathVal;
+  console.log("cow");
 
   if (newPath.length > 12) thisVal = "~";
 
@@ -48,6 +50,7 @@ function addTextElement(pathVal, prevValue) {
 
   textRow.appendChild(blueText);
   textRow.appendChild(greenText);
+  pathList.appendChild(textRow);
 }
 
 function addInvalidText(pathVal) {
@@ -55,7 +58,7 @@ function addInvalidText(pathVal) {
   textRow.classList.add("flex-row");
 
   let errorText = document.createElement("span");
-  errorText.innerHTML = pathVal;
+  errorText.innerHTML = "$ " + pathVal;
   errorText.classList.add("red-text");
   textRow.appendChild(errorText);
   pathList.appendChild(textRow);

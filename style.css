@@ -4,6 +4,7 @@
   --text-color: rgb(255, 239, 213);
   --green: rgb(35, 217, 50);
   --blue: rgb(91, 140, 240);
+  --red-color: rgb(100, 10, 10);
 }
 
 @font-face {
@@ -71,6 +72,10 @@ span {
 
 .blue-text {
   color: var(--blue);
+}
+
+.red-text {
+  color: var(--red-color);
 }
 
 img {
