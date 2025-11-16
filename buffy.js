@@ -54,7 +54,7 @@ function checkCommand(pathVal) {
     case Command.HELP:
       addInvalidText(
         " are valid commands",
-        "cd, ls, help, clear, bat, wow, and buffy"
+        "cd, cd .., ls, help, clear, bat, wow, and buffy"
       );
       break;
     case Command.LS:
