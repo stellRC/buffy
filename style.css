@@ -92,13 +92,15 @@ img {
 }
 
 .background {
-  background-size: cover;
+  background-image: url("http://www.transparenttextures.com/patterns/wood-pattern.png");
 }
 
 .buffy-img {
   background-color: var(--highlight-color);
+  background-size: cover;
   /* background-image: url("http://www.transparenttextures.com/patterns/wood-pattern.png"); */
-  width: 60vw;
+  background-blend-mode: color-burn;
+  width: 70vw;
   height: 30vw;
   outline: groove 1rem var(--highlight-color);
   filter: grayscale(10%);

@@ -38,7 +38,7 @@ const Command = {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  buffyImg.classList.remove("background");
+  // buffyImg.classList.remove("background");
 
   checkCommand(path.value);
 
