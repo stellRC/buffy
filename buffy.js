@@ -18,6 +18,41 @@ const cheese = [
   "me",
 ];
 
+const vamp = [
+  "Vampire bats do not suck blood. They make a small incision and lap up the blood of their hosts. ",
+  "Vampire bats have fewer teeth than any other bat because they do not have to chew their food. ",
+  "Recording bat sonar is something soothingly akin to having one's teeth drilled. ",
+  "He can transform himself to wolf...he can be as bat. ",
+  "Goodnight, gentlemen. Don't let the vampires get you. ",
+];
+
+const buffyQuote = [
+  "I may be dead, but I'm still pretty.",
+  "If the apocalypse comes, beep me",
+  "Okay. I'm cookie dough... I'm not done baking. I'm not finished becoming whoever the hell it is I'm gonna turn out to be.",
+  "It looks dead. It smells dead. Yet it's moving around. That's interesting.",
+  "The hardest thing in this world is to live in it.",
+  "You were myth-taken!",
+  "Excuse me, I have to call everyone I have ever met",
+  "Well I’m not exactly quaking in my stylish yet affordable boots",
+  "Don't speak Latin in front of the books.",
+  "I was being patient, but it took too long!",
+  "If nothing we do matters, then all that matters is what we do.",
+  "I'd call that a radical interpretation of the text.",
+  "You’re logic doesn’t resemble our Earth logic",
+  "You’re not the brightest god in the heavens, are you?",
+  "I swear one of these days you're gonna wake up in a coma...",
+  "They got the mustard out",
+  "I swear that hydrant wasn’t there!",
+  "A doodle. I do doodle. You too. You do doodle, too.",
+  "There’s a party in my eye socket and everyone’s invited",
+  "See? Now we're communicating.",
+  "I'm afraid you and your buddies are going to have to come back and be killed by Buffy later.",
+  "Bag of knives!",
+  "I've got it covered from A to Z - from 'axe' to... 'zee other axe'",
+  "I'm nice to meet!",
+];
+
 let thisVal = "~";
 
 let currentIndex = 0;
@@ -64,7 +99,8 @@ function checkCommand(pathVal) {
       processCD(newPath);
       break;
     case Command.BUFFY:
-      addInvalidText("", "If the apocalypse comes, beep me");
+      let buffyRand = getRandomInt(buffyQuote.length);
+      addInvalidText("", buffyQuote[buffyRand]);
       break;
     case Command.WOW:
       addInvalidText("", "FROG EGGS");
@@ -75,10 +111,8 @@ function checkCommand(pathVal) {
       break;
     case Command.BAT:
       processBat();
-      addInvalidText(
-        "Bat count: " + batList.childElementCount,
-        "Recording bat sonar is something soothingly akin to having one's teeth drilled. "
-      );
+      let rand = getRandomInt(vamp.length);
+      addInvalidText("Bat count: " + batList.childElementCount, vamp[rand]);
       break;
     default:
       addInvalidText(" not recognized", pathVal);
@@ -227,4 +261,8 @@ function removeAllChildren() {
   while (pathList.firstElementChild) {
     pathList.lastElementChild.remove();
   }
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }
