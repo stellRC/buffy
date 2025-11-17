@@ -131,7 +131,7 @@ function processCD(newPath) {
     }
     validPath = true;
   } else if (
-    newPath == shows[currentIndex] &&
+    newPath == shows[currentIndex] + "/" &&
     (chosenPath == 0 || chosenPath == 1)
   ) {
     chosenPath = 1;
@@ -139,14 +139,14 @@ function processCD(newPath) {
     currentIndex++;
     validPath = true;
   } else if (
-    newPath == quote[currentIndex] &&
+    newPath == quote[currentIndex] + "/" &&
     (chosenPath == 0 || chosenPath == 2)
   ) {
     chosenPath = 2;
     currentIndex++;
     validPath = true;
   } else if (
-    newPath == cheese[currentIndex] &&
+    newPath == cheese[currentIndex] + "/" &&
     (chosenPath == 0 || chosenPath == 3)
   ) {
     chosenPath = 3;
@@ -156,9 +156,8 @@ function processCD(newPath) {
 
   if (validPath == true) {
     addTextElement(newPath, thisVal);
-    if (newPath != "") {
-      thisVal += "/" + newPath;
-    }
+
+    thisVal += newPath;
   } else {
     addInvalidText(" not recognized", path.value);
   }
@@ -231,7 +230,7 @@ function addTextElement(pathVal, prevValue) {
   let greenText = document.createElement("span");
   let newPath = prevValue;
   if (pathVal != "") {
-    newPath += "/" + pathVal;
+    newPath += pathVal;
   }
 
   greenText.innerHTML = newPath;
