@@ -89,10 +89,13 @@ function checkCommand(pathVal) {
 
 function processCD(newPath) {
   if (newPath == Command.BACK) {
-    if (currentIndex >= 1) {
+    if (currentIndex >= 2) {
       newPath = processBack();
-      validPath = true;
+    } else {
+      resetPath();
+      newPath = "";
     }
+    validPath = true;
   } else if (
     newPath == shows[currentIndex] &&
     (chosenPath == 0 || chosenPath == 1)
