@@ -253,7 +253,7 @@ function addInvalidText(msg, pathVal) {
 }
 
 function removeTextElement() {
-  if (pathList.childElementCount > 4) pathList.firstElementChild.remove();
+  if (pathList.childElementCount > 3) pathList.firstElementChild.remove();
 }
 
 function removeAllChildren() {
